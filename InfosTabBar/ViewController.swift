@@ -9,11 +9,28 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
+    @IBOutlet weak var tf: UITextField!
+    
+    @IBOutlet weak var button: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "Tab", let vc = segue.destination as? TabController {
+            vc.valeur = sender as? String
+        }
+    }
+    
+    @IBAction func buttonPressed(_ sender: Any) {
+        if let texte = tf.text, texte != "" {
+            performSegue(withIdentifier: "Tab", sender: texte)
+        }
+    }
+    
 
 
 }
